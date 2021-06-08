@@ -44,7 +44,6 @@ public final class KillReward extends JavaPlugin implements @NotNull Listener {
                 sender.sendMessage("/killrew get <殺人鬼が得る割合(%)>");
                 sender.sendMessage("消す割合より得る割合がでかいと増えます");
                 sender.sendMessage("どちらの割合も単位は%で保存されます(10ってやったら10%)");
-                vault.deposit((Player) sender,10000);
                 return true;
             }
             if (args[0].equals("rem")) {
