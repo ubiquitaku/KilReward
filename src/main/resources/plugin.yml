@@ -1,0 +1,11 @@
+name: KillReward
+version: ${project.version}
+main: ubiquitaku.killreward.KillReward
+api-version: 1.16
+commands:
+  killrew:
+permissions:
+  killrew.op:
+    default: op
+  killrew.not:
+    default: true
