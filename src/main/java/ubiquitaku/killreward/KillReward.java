@@ -94,9 +94,7 @@ public final class KillReward extends JavaPlugin implements @NotNull Listener {
             return;
         }
         double value = vault.getBalance(dead);
-        System.out.println(value);
         vault.withdraw(dead,Math.round(value*rem/100));
-        System.out.println(rem);
         vault.deposit(killer,Math.round(value*get/100));
     }
 
