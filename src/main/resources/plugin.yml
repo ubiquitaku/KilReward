@@ -8,4 +8,4 @@ permissions:
   killrew.op:
     default: op
   killrew.not:
-    default: true
+    default: false

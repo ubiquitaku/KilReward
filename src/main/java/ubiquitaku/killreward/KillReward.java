@@ -13,8 +13,8 @@ import org.jetbrains.annotations.NotNull;
 
 public final class KillReward extends JavaPlugin implements @NotNull Listener {
     FileConfiguration config;
-    double rem;
-    double get;
+    int rem;
+    int get;
     VaultManager vault;
 
     @Override
@@ -22,7 +22,9 @@ public final class KillReward extends JavaPlugin implements @NotNull Listener {
         // Plugin startup logic
         vault = new VaultManager();
         saveDefaultConfig();
-        configReload();
+        config = getConfig();
+        rem = config.getInt("removeMoney");
+        get = config.getInt("getMoney");
         Bukkit.getPluginManager().registerEvents(this,this);
     }
 
@@ -52,6 +54,7 @@ public final class KillReward extends JavaPlugin implements @NotNull Listener {
                     return true;
                 }
                 config.set("removeMoney",args[1]);
+                rem = Integer.parseInt((args[1]));
                 configReload();
                 sender.sendMessage("消す割合を設定しました");
                 return true;
@@ -62,6 +65,7 @@ public final class KillReward extends JavaPlugin implements @NotNull Listener {
                     return true;
                 }
                 config.set("getMoney",args[1]);
+                get = Integer.parseInt((args[1]));
                 configReload();
                 sender.sendMessage("得る割合を設定しました");
             }
@@ -75,12 +79,12 @@ public final class KillReward extends JavaPlugin implements @NotNull Listener {
 
     @EventHandler
     public void onPlayerKill(PlayerDeathEvent e) {
-        if (e.getEntity().hasPermission("killrew.op")) {
-            return;
-        }
-        if (e.getEntity().hasPermission("killrew.not")) {
-            return;
-        }
+//        if (e.getEntity().hasPermission("killrew.op")) {
+//            return;
+//        }
+//        if (e.getEntity().hasPermission("killrew.not")) {
+//            return;
+//        }
         Player dead;
         Player killer;
         try {
@@ -90,14 +94,15 @@ public final class KillReward extends JavaPlugin implements @NotNull Listener {
             return;
         }
         double value = vault.getBalance(dead);
-        vault.withdraw(dead,value*rem);
-        vault.deposit(killer,value*get);
+        System.out.println(value);
+        vault.withdraw(dead,Math.round(value*rem/100));
+        System.out.println(rem);
+        vault.deposit(killer,Math.round(value*get/100));
     }
 
     public void configReload() {
         saveConfig();
         config = getConfig();
-        rem = config.getDouble("removeMoney")/100;
-        get = config.getDouble("getMoney")/100;
+
     }
 }
