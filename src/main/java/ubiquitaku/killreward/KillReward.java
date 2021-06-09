@@ -79,12 +79,12 @@ public final class KillReward extends JavaPlugin implements @NotNull Listener {
 
     @EventHandler
     public void onPlayerKill(PlayerDeathEvent e) {
-//        if (e.getEntity().hasPermission("killrew.op")) {
-//            return;
-//        }
-//        if (e.getEntity().hasPermission("killrew.not")) {
-//            return;
-//        }
+        if (e.getEntity().hasPermission("killrew.op")) {
+            return;
+        }
+        if (e.getEntity().hasPermission("killrew.not")) {
+            return;
+        }
         Player dead;
         Player killer;
         try {
