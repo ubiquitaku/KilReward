@@ -61,8 +61,13 @@ public final class KillReward extends JavaPlugin implements @NotNull Listener {
                     sender.sendMessage(prefix+"argsの数が間違っています");
                     return true;
                 }
+                try {
+                    rem = Integer.parseInt((args[1]));
+                } catch (NumberFormatException e) {
+                    sender.sendMessage(prefix+"割合の部分には数字を入力してください");
+                    return true;
+                }
                 config.set("removeMoney",args[1]);
-                rem = Integer.parseInt((args[1]));
                 configReload();
                 sender.sendMessage(prefix+"殺されたプレイヤーから削除される割合を変更しました");
                 return true;
@@ -72,8 +77,13 @@ public final class KillReward extends JavaPlugin implements @NotNull Listener {
                     sender.sendMessage(prefix+"argsの数が間違っています");
                     return true;
                 }
+                try {
+                    get = Integer.parseInt((args[1]));
+                } catch (NumberFormatException e) {
+                    sender.sendMessage(prefix+"割合の部分には数字を入力してください");
+                    return true;
+                }
                 config.set("getMoney",args[1]);
-                get = Integer.parseInt((args[1]));
                 configReload();
                 sender.sendMessage(prefix+"殺したプレイヤーが得る割合を変更しました");
                 return true;
